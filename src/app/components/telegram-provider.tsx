@@ -34,7 +34,7 @@ export async function executeContractAction(
   try {
     const fees = await account?.estimateInvokeFee([call]);
     const tx = await contract[action]({
-      maxFee: fees?.suggestedMaxFee ? BigInt(fees.suggestedMaxFee) * 2n : undefined,
+      maxFee: fees?.suggestedMaxFee ? BigInt(1000000000000000000).toString() : undefined,
     });
     await argentTMA.provider.waitForTransaction(tx.transaction_hash);
     // toast.success(successMessage);
