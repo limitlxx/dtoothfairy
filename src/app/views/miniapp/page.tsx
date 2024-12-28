@@ -2,25 +2,25 @@
 import Image from "next/image"; 
 import { useEffect, useState } from "react";
 
-import { Contract, type AccountInterface, type Call } from 'starknet';
-import type { SessionAccountInterface } from '@argent/tma-wallet'; 
+// import { Contract, type AccountInterface, type Call } from 'starknet';
+// import type { SessionAccountInterface } from '@argent/tma-wallet'; 
  
 import { initWallet } from '../../components/telegram-provider'; 
 
 
 export default function Telegram() { 
-  const ABI = [{}];
+  // const ABI = [{}];
 
   const TAMAGOTCHI_ADDRESS = ""
 
   const argentTMA = initWallet(TAMAGOTCHI_ADDRESS); 
-  const [IsConnected, setIsConnected] = useState(true);
-  const [AccountAddress, setAccountAddress] = useState<string>("");
+  // const [setIsConnected] = useState(true);
+  // const [setAccountAddress] = useState<string>("");
 
-  let account: SessionAccountInterface | undefined;
-  let isConnected = false;
-  let isLoading = false;
-  let contract: Contract | undefined;
+  // let account: SessionAccountInterface | undefined;
+  // let isConnected = false;
+  // let isLoading = false;
+  // let contract: Contract | undefined;
 
   useEffect(() => {
     // Call connect() as soon as the app is loaded
@@ -29,7 +29,7 @@ export default function Telegram() {
       .then((res) => {
         if (!res) {
           // Not connected
-          setIsConnected(false);
+          // setIsConnected(false);
           return;
         }
         
@@ -43,14 +43,14 @@ export default function Telegram() {
           // but transactions can't be executed
           const { account } = res;
 
-          setAccountAddress(account.address);
-          setIsConnected(false);
+          // setAccountAddress(account.address);
+          // setIsConnected(false);
           return;
         }
 
         // The session account is returned and can be used to submit transactions
-        setAccountAddress(account.address);
-        setIsConnected(true);
+        // setAccountAddress(account.address);
+        // setIsConnected(true);
         // Custom data passed to the requestConnection() method is available here
         console.log("callback data:", callbackData);
       })
