@@ -5,7 +5,7 @@ export const initWallet = (contractAddress: string) =>
   ArgentTMA.init({
     environment: 'sepolia',
     appName: 'Argent TMA',
-    appTelegramUrl: 'https://t.me/testy_afriquatz_bot/testDapp',
+    appTelegramUrl: 'https://t.me/testy_afriquatz_bot/mytestargent',
     sessionParams: {
       allowedMethods: [
         { contract: contractAddress, selector: 'feed' },
