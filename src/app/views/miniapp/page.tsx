@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"; 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // import { Contract, type AccountInterface, type Call } from 'starknet';
 // import type { SessionAccountInterface } from '@argent/tma-wallet'; 
@@ -41,7 +41,7 @@ export default function Telegram() {
 
           // The account object is still available to get access to user's address
           // but transactions can't be executed
-          const { account } = res;
+          // const { account } = res;
 
           // setAccountAddress(account.address);
           // setIsConnected(false);
