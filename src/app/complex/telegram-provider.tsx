@@ -4,7 +4,7 @@ import type { Call, Contract } from 'starknet';
 export const initWallet = (contractAddress: string) =>
   ArgentTMA.init({
     environment: 'sepolia',
-    appName: 'Argent TMA',
+    appName: 'testDApp',
     appTelegramUrl: 'https://t.me/testy_afriquatz_bot/mytestargent',
     sessionParams: {
       allowedMethods: [
