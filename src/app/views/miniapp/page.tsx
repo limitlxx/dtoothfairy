@@ -1,63 +1,9 @@
 "use client"
-import Image from "next/image"; 
-import { useEffect } from "react";
-
-// import { Contract, type AccountInterface, type Call } from 'starknet';
-// import type { SessionAccountInterface } from '@argent/tma-wallet'; 
- 
-import { initWallet } from '../../components/telegram-provider'; 
+import Image from "next/image";  
 
 
 export default function Telegram() { 
-  // const ABI = [{}];
-
-  const TAMAGOTCHI_ADDRESS = ""
-
-  const argentTMA = initWallet(TAMAGOTCHI_ADDRESS); 
-  // const [setIsConnected] = useState(true);
-  // const [setAccountAddress] = useState<string>("");
-
-  // let account: SessionAccountInterface | undefined;
-  // let isConnected = false;
-  // let isLoading = false;
-  // let contract: Contract | undefined;
-
-  useEffect(() => {
-    // Call connect() as soon as the app is loaded
-    argentTMA
-      .connect()
-      .then((res) => {
-        if (!res) {
-          // Not connected
-          // setIsConnected(false);
-          return;
-        }
-        
-        const { account, callbackData } = res;
-
-        if (account.getSessionStatus() !== "VALID") {
-          // Session has expired or scope (allowed methods) has changed
-          // A new connection request should be triggered
-
-          // The account object is still available to get access to user's address
-          // but transactions can't be executed
-          // const { account } = res;
-
-          // setAccountAddress(account.address);
-          // setIsConnected(false);
-          return;
-        }
-
-        // The session account is returned and can be used to submit transactions
-        // setAccountAddress(account.address);
-        // setIsConnected(true);
-        // Custom data passed to the requestConnection() method is available here
-        console.log("callback data:", callbackData);
-      })
-      .catch((err) => {
-        console.error("Failed to connect", err);
-      });
-  }, []);
+ 
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
