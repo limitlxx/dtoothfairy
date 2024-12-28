@@ -1,9 +1,64 @@
+"use client"
+import Image from "next/image"; 
+import { useEffect, useState } from "react";
+
+import { Contract, type AccountInterface, type Call } from 'starknet';
+import type { SessionAccountInterface } from '@argent/tma-wallet'; 
  
-import Image from "next/image";  
+import { initWallet } from '../../components/telegram-provider'; 
 
 
-export default function Home() { 
-   
+export default function Telegram() { 
+  const ABI = [{}];
+
+  const TAMAGOTCHI_ADDRESS = ""
+
+  const argentTMA = initWallet(TAMAGOTCHI_ADDRESS); 
+  const [IsConnected, setIsConnected] = useState(true);
+  const [AccountAddress, setAccountAddress] = useState<string>("");
+
+  let account: SessionAccountInterface | undefined;
+  let isConnected = false;
+  let isLoading = false;
+  let contract: Contract | undefined;
+
+  useEffect(() => {
+    // Call connect() as soon as the app is loaded
+    argentTMA
+      .connect()
+      .then((res) => {
+        if (!res) {
+          // Not connected
+          setIsConnected(false);
+          return;
+        }
+        
+        const { account, callbackData } = res;
+
+        if (account.getSessionStatus() !== "VALID") {
+          // Session has expired or scope (allowed methods) has changed
+          // A new connection request should be triggered
+
+          // The account object is still available to get access to user's address
+          // but transactions can't be executed
+          const { account } = res;
+
+          setAccountAddress(account.address);
+          setIsConnected(false);
+          return;
+        }
+
+        // The session account is returned and can be used to submit transactions
+        setAccountAddress(account.address);
+        setIsConnected(true);
+        // Custom data passed to the requestConnection() method is available here
+        console.log("callback data:", callbackData);
+      })
+      .catch((err) => {
+        console.error("Failed to connect", err);
+      });
+  }, []);
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -17,29 +72,14 @@ export default function Home() {
         />
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
-            Welcome to Next telegram MiniApp{" "}
+            Welcome to telegram{" "}
             <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-            http://localhost:3000/views/miniapp
+              src/app/page.tsx
             </code>
             .
           </li> 
         </ol>
-
-        <table>
-          <tr  className="px-4">
-            <td>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
-          Get started
-        </button>
-            </td>
-            <td> <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"> 
-          Telegram App
-        </button></td>
-          </tr>
-        </table>
-
-       
-       
+ 
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a

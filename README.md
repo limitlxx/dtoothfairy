@@ -34,3 +34,40 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+Errors
+````bash
+node:url
+Module build failed: UnhandledSchemeError: Reading from "node:url" is not handled by plugins (Unhandled scheme).
+Webpack supports "data:" and "file:" URIs by default.
+You may need an additional plugin to handle "node:" URIs.
+
+## solution
+npm install node-polyfill-webpack-plugin --save-dev
+
+```js
+// update next.config.js
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+
+module.exports = {
+  webpack(config, { isServer }) {
+    // Add the NodePolyfillPlugin for the client-side build
+    if (!isServer) {
+      config.plugins.push(new NodePolyfillPlugin());
+    }
+    
+    // Optional: Manually specify fallbacks for specific Node.js built-ins (like `url`)
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      url: require.resolve('url/'),
+    };
+
+    return config;
+  },
+};
+
+`````
+````
+
+
