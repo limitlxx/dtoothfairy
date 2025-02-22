@@ -68,6 +68,13 @@ module.exports = {
 };
 
 `````
+NEXT_DEBUG=true next build
+
+next build | tee build.log
+
+rm -rf .next
+next build
+
 ````
 
 

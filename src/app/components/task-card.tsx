@@ -1,3 +1,4 @@
+'use client'
 interface TaskCardProps {
     icon: React.ReactNode
     title: string

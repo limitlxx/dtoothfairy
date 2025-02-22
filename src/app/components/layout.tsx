@@ -4,6 +4,8 @@ import { Coins, Users, Newspaper, TrendingUp, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import { Header } from "./header"
+
 interface LayoutProps {
   children: React.ReactNode
 }
@@ -14,9 +16,17 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
       {/* Header */}
-      {/* <header className="p-4">
-        <h1 className="text-center text-sm font-medium">dToothFairy</h1>
-      </header> */}
+         
+      <Header 
+        leftUser={{
+          icon: "",
+          name: "Nick Jay"
+        }}
+        rightUser={{
+          icon: "",
+          name: "Argent X"
+        }}
+      /> 
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col max-w-md mx-auto w-full px-4 pb-20">
