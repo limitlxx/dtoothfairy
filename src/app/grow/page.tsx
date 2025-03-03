@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from "react"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TaskCard } from "../components/task-card"
@@ -15,8 +14,7 @@ export default function GrowPage() {
   }>(null)
 
   return (
-    <div className="flex flex-col">
-     
+    <div className="flex flex-col">    
 
       <div className="flex flex-col gap-6 p-4">
         {/* Balance Display */}

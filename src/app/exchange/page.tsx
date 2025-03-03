@@ -6,26 +6,34 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 
 export default function ExchangePage() {
-  const [progress, setProgress] = useState(0)
-  const [timeLeft, setTimeLeft] = useState('07:23:02')
-  const [energy, setEnergy] = useState(650)
+  const [progress, setProgress] = useState<number>(); // No initial value
+  const [timeLeft, setTimeLeft] = useState<string>(); // No initial value
+  const [energy, setEnergy] = useState<number>(); // No initial value
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    // Ensure code only runs on the client side
+    setIsClient(true)
+    
     // Simulate progress updating
     setTimeLeft('07:23:02')
     setEnergy(6500)
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
+        if (prev !== undefined && prev >= 100) {
           clearInterval(interval)
           return 100
         }
-        return prev + 1
+        return (prev ?? 0) + 1
       })
     }, 1000)
 
     return () => clearInterval(interval)
   }, [])
+
+  if (!isClient) {
+    return null // or a loading spinner if you want to display something while waiting
+  }
 
   return (
     <div className="flex flex-col items-center gap-6 py-4">
@@ -51,9 +59,9 @@ export default function ExchangePage() {
 
       {/* Progress Section */}
       <div className="w-full max-w-xs flex flex-col gap-2">
-        <Progress value={progress} className="h-1.5 bg-zinc-800" />
+        <Progress value={progress ?? 0} className="h-1.5 bg-zinc-800" />
         <div className="flex justify-between text-sm text-zinc-400">
-          <span>{timeLeft}</span>
+          <span>{timeLeft  ?? "Loading..."}</span>
           <div className="flex items-center gap-1">
             <svg
               viewBox="0 0 24 24"
@@ -67,7 +75,7 @@ export default function ExchangePage() {
                 stroke="none"
               />
             </svg>
-            <span>{energy}</span>
+            <span>{energy  ?? "Loading..."}</span>
           </div>
         </div>
       </div>
@@ -75,11 +83,10 @@ export default function ExchangePage() {
       {/* Claim Button */}
       <Button
         className="w-full max-w-xs bg-zinc-800 hover:bg-zinc-700 text-white rounded-full h-12"
-        disabled={progress < 100}
+        disabled={(progress ?? 0) < 100}
       >
         Claim
       </Button>
     </div>
   )
 }
-

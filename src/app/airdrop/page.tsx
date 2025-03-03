@@ -1,8 +1,9 @@
+'use client'
 import { Button }  from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 
-export default function Home() {
+export default function Airdrop() {
   return (
     <div className="flex flex-col items-center gap-6 py-4">
       {/* Balance Display */}

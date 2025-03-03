@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button"
 import { NewsCard } from "../components/news-card"
 import { CountdownTimer } from "../components/countdown-timer"
