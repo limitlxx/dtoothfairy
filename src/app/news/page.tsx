@@ -36,7 +36,7 @@ export default function NewsPage() {
 
         {/* News List */}
         <div className="w-full flex flex-col gap-3">
-          {[1, 2, 3, 4, 5].map((i) => (
+          {[1, 2, 3].map((i) => (
             <NewsCard
               key={i}
               title="New tooth inventions"

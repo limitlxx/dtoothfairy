@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 const nextConfig: NextConfig = {
+  // output: 'export',
   /* config options here */
   webpack(config, { isServer }) {
     // Add the NodePolyfillPlugin for the client-side build
